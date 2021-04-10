@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: This is jenkins deployement
+Resources:
+  devClearExistingExportZip:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs10.x
+      CodeUri: .
+      Description: This is jenkins deployement
+      MemorySize: 1664
+      Timeout: 600
+      Role: 'arn:aws:iam::491655376147:role/dev_ClearExistingExportZip'
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-005a73d593a28e2a0
+        SubnetIds:
+          - subnet-06a08a7de749cfd7d
+          - subnet-02f8f518e75d79ff5
+      Environment:
+        Variables:
+          ssm_store: /dev/
+      Tags:
+        Environment: Dev
